@@ -13,12 +13,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from './shared/shared.module';
 
 // Firebase imports
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HelpComponent } from './help/help.component';
 import { AboutComponent } from './about/about.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
 
 
 @NgModule({
@@ -33,11 +33,11 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatGridListModule,
+    AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
