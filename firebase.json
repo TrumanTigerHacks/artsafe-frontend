@@ -1,59 +1,19 @@
 {
-  "functions": {
-    "source": ".",
-    "ignore": [
-      ".circleci",
-      ".DS_Store",
-      ".firebase",
-      ".git",
-      ".vscode",
-      "build/public/**",
-      "coverage",
-      "migrations",
-      "node_modules",
-      "public",
-      "scripts",
-      "seeds",
-      "src",
-      ".babelrc",
-      ".editorconfig",
-      ".env.local",
-      ".env.*.local",
-      ".eslintrc",
-      ".gitattributes",
-      ".gitignore",
-      ".prettierignore",
-      ".prettierrc",
-      "knexfile.js",
-      "LICENSE.txt",
-      "README.md",
-      "schema.graphql",
-      "storage.rules",
-      "yarn-debug.log*",
-      "yarn-error.log*"
-    ]
-  },
   "hosting": {
-    "public": "build/public",
-    "rewrites": [
+    "public": "dist/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [ 
       {
         "source": "**",
-        "function": "app"
-      }
-    ],
-    "headers": [
-      {
-        "source": "service-worker.js",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
+        "run": {
+          "serviceId": "nest-angular-ssr",
+          "region": "us-central1" 
+        }
       }
     ]
-  },
-  "storage": {
-    "rules": "storage.rules"
   }
 }
