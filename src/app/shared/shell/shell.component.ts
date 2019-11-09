@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon'; 
 
 @Component({
   selector: 'app-shell',
