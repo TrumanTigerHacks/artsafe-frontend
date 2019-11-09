@@ -3,8 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon'; 
+import { OverlayModule } from '@angular/cdk/overlay'; 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'; 
 
 @Component({
   selector: 'app-shell',
@@ -18,6 +19,10 @@ export class ShellComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+    startOverlay(event: Event) {
+
+    }
 
   constructor(private breakpointObserver: BreakpointObserver, public afAuth: AngularFireAuth) {}
 

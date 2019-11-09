@@ -17,18 +17,18 @@
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-
-
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <button class="fab" mat-raised-button >
+
+      <button class="fab" mat-raised-button (click)=startOverlay($event)>
         <mat-icon style="color: black;">add</mat-icon>
       </button>
+      
       <img class="logo" src="assets/imgs/Logo2.png" />
-
+      
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
       
       <mat-menu #menu="matMenu">
         <a mat-menu-item routerLink="/help">

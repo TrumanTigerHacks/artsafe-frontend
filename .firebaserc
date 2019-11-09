@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "angular-voxer"
+    "default": "angular-voxer",
+    "frontend": "storied-groove-258504"
   }
 }
