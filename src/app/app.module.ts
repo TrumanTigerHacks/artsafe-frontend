@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconRegistry} from '@angular/material/icon';
-import {DomSanitizer} from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatGridListModule } from '@angular/material';
 
 // App Modules
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { AboutComponent } from './about/about.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
