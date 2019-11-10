@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { tap, finalize } from 'rxjs/operators';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-contrib',
@@ -33,7 +35,7 @@ export class AddContribComponentDialog {
 
   artPieceCollection: AngularFirestoreCollection<ArtPiece>;
   artPieces: Observable<ArtPiece[]>;
-
+  fileData: File = null;
   form;
   checked='false';
   ngOnInit() {
@@ -44,20 +46,40 @@ export class AddContribComponentDialog {
   		pieceName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
   		artistFirst: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
       artistLast: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
-      description: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
-      art: new FormControl()
+      description: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')]))
   	});
   }
 
   constructor(private db: AngularFirestore,
               public dialogRef: MatDialogRef<AddContribComponentDialog>,
-  ) {}
+              private http: HttpClient) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  onSubmit(art) {
-  	this.artPieceCollection.add(art);
+ 
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+  }
+ 
+  onSubmit(piece) {
+    console.log(piece);
+    const formData = new FormData();
+    formData.append('file', this.fileData);
+    const json = {
+      'link': `http://artsafe.space/${new Date().getTime()}_${piece.pieceName}`,
+      'image': this.fileData
+    };
+    console.log(formData.get('file'));
+    this.http.post('/about', formData, {
+      reportProgress: true,
+      observe: 'events'   
+    }).subscribe(events => {
+      if(events.type == HttpEventType.UploadProgress) {
+        console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
+      } else if(events.type === HttpEventType.Response) {
+        console.log(events);
+      }
+    })
   }
 }

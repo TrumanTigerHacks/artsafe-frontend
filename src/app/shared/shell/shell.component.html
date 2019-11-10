@@ -19,10 +19,8 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-
-      <app-add-contrib>loading</app-add-contrib>
-
-      <img class="logo" src="assets/imgs/Logo2.png" />
+        <app-add-contrib>loading</app-add-contrib>
+        <a class="logo" routerLink="/" (click)="drawer.close()"><img src="assets/imgs/Logo2.png" /></a>
       
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>

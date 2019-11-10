@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material';
-
+import { HttpClientModule } from '@angular/common/http';
 
 const components = [
   AddContribComponent,
@@ -35,7 +35,8 @@ const modules = [
   MatInputModule,
   MatSnackBarModule,
   ReactiveFormsModule,
-  MatDialogModule
+  MatDialogModule,
+  HttpClientModule
 ];
 
 @NgModule({
