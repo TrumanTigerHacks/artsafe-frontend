@@ -20,10 +20,6 @@ export class ShellComponent {
       shareReplay()
     );
 
-    startOverlay(event: Event) {
-
-    }
-
   constructor(private breakpointObserver: BreakpointObserver, public afAuth: AngularFireAuth) {}
 
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ArtPiece } from '../add-contrib/ArtPiece';
+import { MatIconModule } from '@angular/material/icon';
+import { ArtPiece } from './ArtPiece';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-contrib',
@@ -11,26 +14,22 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
   styleUrls: ['./add-contrib.component.scss']
 })
 export class AddContribComponent {
-
   constructor(public m : MatDialog) { }
 
   startOverlay(): void {
     this.m.open(AddContribComponentDialog, {
-      width: '50%',
-      minHeight: '500px'
+      width: '60%',
+      minHeight: '400px'
     });
   }
 }
 
 @Component({
   selector: 'app-add-contrib-dialog',
-  templateUrl: './add-contrib-dialog.component.html'
+  templateUrl: './add-contrib-dialog.component.html',
+  styleUrls: ['./add-contrib.component.scss']
 })
-
 export class AddContribComponentDialog {
-  constructor(private db: AngularFirestore,
-    public dialogRef: MatDialogRef<AddContribComponentDialog>,
-  ) {}
 
   artPieceCollection: AngularFirestoreCollection<ArtPiece>;
   artPieces: Observable<ArtPiece[]>;
@@ -38,20 +37,21 @@ export class AddContribComponentDialog {
   form;
   checked='false';
   ngOnInit() {
-    this.artPieceCollection = this.db.collection('');
+    this.artPieceCollection = this.db.collection('ArtPiece');
     this.artPieces = this.artPieceCollection.valueChanges();
 
     this.form = new FormGroup({
-  		pieceName: new FormControl(),
+  		pieceName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
   		artistFirst: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
       artistLast: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
-      medium: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
-      published: new FormControl(),
-  		explicit: new FormControl(null),
-      sensitive: new FormControl(false),
-      description: new FormControl(false)
+      description: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])),
+      art: new FormControl()
   	});
   }
+
+  constructor(private db: AngularFirestore,
+              public dialogRef: MatDialogRef<AddContribComponentDialog>,
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();

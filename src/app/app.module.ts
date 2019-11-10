@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from './shared/shared.module';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // Firebase imports
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -20,7 +21,12 @@ import { AboutComponent } from './about/about.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { DropZoneDirective } from './drop-zone.directive';
-import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FileSizePipe } from './shared/file-size.pipe';
+import { MatDialogModule } from '@angular/material';
+import {MatInputModule} from '@angular/material';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AddContribComponentDialog, AddContribComponent } from './shared/dropper/add-contrib/add-contrib.component';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 
 @NgModule({
@@ -30,7 +36,6 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     HelpComponent,
     AboutComponent,
     DropZoneDirective,
-    FileUploadComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -40,11 +45,18 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatGridListModule,
-    AngularFireModule.initializeApp(environment.firebase),
-		AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    MatDialogModule,
+    MatInputModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AngularFirestore, AngularFireStorage],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AddContribComponentDialog
+  ]
 })
 export class AppModule {
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){

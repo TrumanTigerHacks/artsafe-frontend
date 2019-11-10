@@ -44,8 +44,10 @@
     "angularfire2": "^5.2.1",
     "firebase": "^6.6.2",
     "hammerjs": "^2.0.8",
+    "python-shell": "^1.0.8",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.4.0",
+    "rxjs-compat": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
