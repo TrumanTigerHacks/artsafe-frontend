@@ -10,13 +10,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import { AddContribComponent } from './add-contrib/add-contrib.component';
+import { AddContribComponentDialog } from './add-contrib/add-contrib.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const components = [
-  ShellComponent, DeleteButtonComponent
+  ShellComponent, DeleteButtonComponent, AddContribComponent, AddContribComponentDialog
 ];
 
 const modules = [

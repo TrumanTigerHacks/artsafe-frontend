@@ -19,6 +19,8 @@ import { HelpComponent } from './help/help.component';
 import { AboutComponent } from './about/about.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
+import { DropZoneDirective } from './drop-zone.directive';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { AngularFireModule } from 'angularfire2';
     HomePageComponent,
     HelpComponent,
     AboutComponent,
+    DropZoneDirective,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

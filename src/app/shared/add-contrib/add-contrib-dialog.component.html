@@ -1,0 +1,20 @@
+<h1 mat-dialog-title> Add New Art Piece:</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="example-form" style="height: 400px;"> 
+    <mat-form-field style="width:50%">
+        <div style="color:red;" *ngIf="form.get('firstname').hasError('pattern')">Detected some invalid characters</div>
+      <input formControlName="firstname" name="firstName" matInput placeholder="First Name">
+    </mat-form-field>
+    <mat-form-field style="width:50%">
+        <div style="color:red;" *ngIf="form.get('lastname').hasError('pattern')">Detected some invalid characters</div>
+      <input formControlName="lastname" name="lastName" matInput placeholder="Last Name">
+    </mat-form-field>
+    <mat-form-field style="width:100%;">
+      <input formControlName="notes" name="notes" matInput placeholder="Any Additional Notes?">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button [disabled]="!form.valid" mat-button (click)="onSubmit(form.value)" [mat-dialog-close]>Submit</button>
+      </div>
+  </form>
+</div>

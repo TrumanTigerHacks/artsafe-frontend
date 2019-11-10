@@ -20,10 +20,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <button class="fab" mat-raised-button (click)=startOverlay($event)>
-        <mat-icon style="color: black;">add</mat-icon>
-      </button>
-      
+      <app-add-contrib></app-add-contrib>
+
       <img class="logo" src="assets/imgs/Logo2.png" />
       
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
